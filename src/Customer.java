@@ -22,15 +22,24 @@ class Customer {
         int frequentRenterPoints = 0;
         while (rentalEnumeration.hasMoreElements()) {
             Rental rental = rentalEnumeration.nextElement();
-            frequentRenterPoints += rental.getFrequentRenterPoints(frequentRenterPoints);
-            resultBuilder.append("\t")
-                    .append(rental.getMovie().getTitle()).append("\t")
-                    .append(rental.getDaysRented()).append("\t")
-                    .append(rental.amountFor()).append("\n");
-            }
+            appendResult(resultBuilder, rental);
+            frequentRenterPoints = updateFrequentRenterPoints(frequentRenterPoints, rental);
+        }
         double totalAmount = getTotalCharge();
         addFooter(totalAmount, frequentRenterPoints, resultBuilder);
         return resultBuilder.toString();
+    }
+
+    private int updateFrequentRenterPoints(int frequentRenterPoints, Rental rental) {
+        frequentRenterPoints += rental.getFrequentRenterPoints(frequentRenterPoints);
+        return frequentRenterPoints;
+    }
+
+    private void appendResult(StringBuilder resultBuilder, Rental rental) {
+        resultBuilder.append("\t")
+                .append(rental.getMovie().getTitle()).append("\t")
+                .append(rental.getDaysRented()).append("\t")
+                .append(rental.amountFor()).append("\n");
     }
 
     private void addHeader(StringBuilder resultBuilder) {
@@ -39,8 +48,12 @@ class Customer {
     }
 
     private void addFooter(double totalAmount, int frequentRenterPoints, StringBuilder resultBuilder) {
-        resultBuilder.append("Amount owed is ").append(totalAmount).append("\n");
-        resultBuilder.append("You earned ").append(frequentRenterPoints).append(" frequent renter points");
+        resultBuilder.append("Amount owed is ")
+                .append(totalAmount)
+                .append("\n");
+        resultBuilder.append("You earned ")
+                .append(frequentRenterPoints)
+                .append(" frequent renter points");
     }
 
     private double getTotalCharge(){
