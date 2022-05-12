@@ -22,16 +22,12 @@ class Customer {
         result += "\t" + "Title" + "\t" + "\t" + "Days" + "\t" + "Amount" + "\n";
 
         while (enum_rentals.hasMoreElements()) {
-            double amountPerLine = 0;
             Rental rental = (Rental) enum_rentals.nextElement();
-
-            amountPerLine = rental.amountFor();
-
             frequentRenterPoints ++;
             // add bonus for a two day new release rental
             if ((rental.getMovie().getPriceCode() == Movie.NEW_RELEASE) && rental.getDaysRented() > 1)
                 frequentRenterPoints ++;
-            //show figures for this rental
+            double amountPerLine = rental.amountFor();
             result += "\t" + rental.getMovie().getTitle()+ "\t" + "\t" + rental.getDaysRented() + "\t" + String.valueOf(amountPerLine) + "\n";
             totalAmount += amountPerLine;
         }
