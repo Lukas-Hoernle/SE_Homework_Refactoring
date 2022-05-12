@@ -10,10 +10,8 @@ public class ChargeStatement {
                 .append(name)
                 .append("\n");
         contentBuilder.append("\t")
-                .append("Title")
-                .append("\t").append("\t")
-                .append("Days")
-                .append("\t")
+                .append("Title\t\t")
+                .append("Days\t")
                 .append("Amount")
                 .append("\n");
     }
