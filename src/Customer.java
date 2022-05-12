@@ -39,7 +39,7 @@ class Customer {
     Enumeration<Rental> rentalEnumeration = rentals.elements();
         while (rentalEnumeration.hasMoreElements()) {
             Rental rental = rentalEnumeration.nextElement();
-            result += rental.amountFor();
+            result += rental.getCharge();
         }
     return result;
     }

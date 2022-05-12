@@ -27,7 +27,7 @@ public class ChargeStatement {
         contentBuilder.append("\t")
                 .append(rental.getMovie().getTitle()).append("\t")
                 .append(rental.getDaysRented()).append("\t")
-                .append(rental.amountFor()).append("\n");
+                .append(rental.getCharge()).append("\n");
     }
 
 }
