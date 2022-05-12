@@ -24,7 +24,7 @@ class Customer {
 
         while (rentalEnumeration.hasMoreElements()) {
             Rental rental = rentalEnumeration.nextElement();
-            frequentRenterPoints = getFrequentRenterPoints(frequentRenterPoints, rental);
+            frequentRenterPoints = rental.getFrequentRenterPoints(frequentRenterPoints);
             double amountPerLine = rental.amountFor();
             resultBuilder.append("\t").append(rental.getMovie().getTitle()).append("\t").append("\t").append(rental.getDaysRented()).append("\t").append(String.valueOf(amountPerLine)).append("\n");
             totalAmount += amountPerLine;
@@ -41,13 +41,6 @@ class Customer {
     private void addFooter(double totalAmount, int frequentRenterPoints, StringBuilder resultBuilder) {
         resultBuilder.append("Amount owed is ").append(totalAmount).append("\n");
         resultBuilder.append("You earned ").append(frequentRenterPoints).append(" frequent renter points");
-    }
-
-    private int getFrequentRenterPoints(int frequentRenterPoints, Rental rental) {
-        frequentRenterPoints++;
-        if ((rental.getMovie().getPriceCode() == Movie.NEW_RELEASE) && rental.getDaysRented() > 1)
-            frequentRenterPoints++;
-        return frequentRenterPoints;
     }
 
 }
