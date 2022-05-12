@@ -25,8 +25,7 @@ class Customer {
             chargeStatement.addRental(rental);
             frequentRenterPoints = updateFrequentRenterPoints(frequentRenterPoints, rental);
         }
-        double totalAmount = getTotalCharge();
-        chargeStatement.addFooter(totalAmount, frequentRenterPoints);
+        chargeStatement.addFooter(getTotalCharge(), frequentRenterPoints);
         return chargeStatement.getContent();
     }
 
