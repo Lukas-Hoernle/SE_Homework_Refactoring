@@ -15,19 +15,19 @@ class Customer {
         return name;
     };
     public String statement() {
+        ChargeStatement result = new ChargeStatement();
         Enumeration<Rental> rentalEnumeration = rentals.elements();
-        StringBuilder resultBuilder = new StringBuilder();
-        addHeader(resultBuilder);
+        result.addHeader(this.getName());
 
         int frequentRenterPoints = 0;
         while (rentalEnumeration.hasMoreElements()) {
             Rental rental = rentalEnumeration.nextElement();
-            appendResult(resultBuilder, rental);
+            result.addRental(rental);
             frequentRenterPoints = updateFrequentRenterPoints(frequentRenterPoints, rental);
         }
         double totalAmount = getTotalCharge();
-        addFooter(totalAmount, frequentRenterPoints, resultBuilder);
-        return resultBuilder.toString();
+        result.addFooter(totalAmount, frequentRenterPoints);
+        return result.getContent();
     }
 
     private int updateFrequentRenterPoints(int frequentRenterPoints, Rental rental) {
@@ -40,28 +40,6 @@ class Customer {
                 .append(rental.getMovie().getTitle()).append("\t")
                 .append(rental.getDaysRented()).append("\t")
                 .append(rental.amountFor()).append("\n");
-    }
-
-    private void addHeader(StringBuilder resultBuilder) {
-        resultBuilder.append("Rental Record for ")
-                .append(this.getName())
-                .append("\n");
-        resultBuilder.append("\t")
-                .append("Title")
-                .append("\t").append("\t")
-                .append("Days")
-                .append("\t")
-                .append("Amount")
-                .append("\n");
-    }
-
-    private void addFooter(double totalAmount, int frequentRenterPoints, StringBuilder resultBuilder) {
-        resultBuilder.append("Amount owed is ")
-                .append(totalAmount)
-                .append("\n");
-        resultBuilder.append("You earned ")
-                .append(frequentRenterPoints)
-                .append(" frequent renter points");
     }
 
     private double getTotalCharge(){
