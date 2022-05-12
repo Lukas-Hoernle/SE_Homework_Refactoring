@@ -43,8 +43,16 @@ class Customer {
     }
 
     private void addHeader(StringBuilder resultBuilder) {
-        resultBuilder.append("Rental Record for ").append(this.getName()).append("\n");
-        resultBuilder.append("\t").append("Title").append("\t").append("\t").append("Days").append("\t").append("Amount").append("\n");
+        resultBuilder.append("Rental Record for ")
+                .append(this.getName())
+                .append("\n");
+        resultBuilder.append("\t")
+                .append("Title")
+                .append("\t").append("\t")
+                .append("Days")
+                .append("\t")
+                .append("Amount")
+                .append("\n");
     }
 
     private void addFooter(double totalAmount, int frequentRenterPoints, StringBuilder resultBuilder) {
@@ -58,7 +66,7 @@ class Customer {
 
     private double getTotalCharge(){
      double result =0;
-        Enumeration<Rental> rentalEnumeration = rentals.elements();
+    Enumeration<Rental> rentalEnumeration = rentals.elements();
         while (rentalEnumeration.hasMoreElements()) {
             Rental rental = rentalEnumeration.nextElement();
             result += rental.amountFor();
