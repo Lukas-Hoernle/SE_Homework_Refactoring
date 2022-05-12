@@ -23,15 +23,10 @@ class Customer {
         while (rentalEnumeration.hasMoreElements()) {
             Rental rental = rentalEnumeration.nextElement();
             chargeStatement.addRental(rental);
-            frequentRenterPoints = getFrequentRenterPoints(frequentRenterPoints, rental);
+            frequentRenterPoints += rental.getFrequentRenterPoints(frequentRenterPoints);
         }
         chargeStatement.addFooter(getTotalCharge(), frequentRenterPoints);
         return chargeStatement.getContent();
-    }
-
-    private int getFrequentRenterPoints(int frequentRenterPoints, Rental rental) {
-        frequentRenterPoints += rental.getFrequentRenterPoints(frequentRenterPoints);
-        return frequentRenterPoints;
     }
 
     private double getTotalCharge(){
