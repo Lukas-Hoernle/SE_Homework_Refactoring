@@ -15,31 +15,24 @@ class Customer {
         return name;
     };
     public String statement() {
-        ChargeStatement result = new ChargeStatement();
+        ChargeStatement chargeStatement = new ChargeStatement();
         Enumeration<Rental> rentalEnumeration = rentals.elements();
-        result.addHeader(this.getName());
+        chargeStatement.addHeader(this.getName());
 
         int frequentRenterPoints = 0;
         while (rentalEnumeration.hasMoreElements()) {
             Rental rental = rentalEnumeration.nextElement();
-            result.addRental(rental);
+            chargeStatement.addRental(rental);
             frequentRenterPoints = updateFrequentRenterPoints(frequentRenterPoints, rental);
         }
         double totalAmount = getTotalCharge();
-        result.addFooter(totalAmount, frequentRenterPoints);
-        return result.getContent();
+        chargeStatement.addFooter(totalAmount, frequentRenterPoints);
+        return chargeStatement.getContent();
     }
 
     private int updateFrequentRenterPoints(int frequentRenterPoints, Rental rental) {
         frequentRenterPoints += rental.getFrequentRenterPoints(frequentRenterPoints);
         return frequentRenterPoints;
-    }
-
-    private void appendResult(StringBuilder resultBuilder, Rental rental) {
-        resultBuilder.append("\t")
-                .append(rental.getMovie().getTitle()).append("\t")
-                .append(rental.getDaysRented()).append("\t")
-                .append(rental.amountFor()).append("\n");
     }
 
     private double getTotalCharge(){
